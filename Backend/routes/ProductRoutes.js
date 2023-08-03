@@ -1,12 +1,26 @@
-import express from "express"
-import {GetAllProducts , AddProduct , UpdateProduct , deleteProduct, ProductSigleProductDetails} from "../controllers/ProdectController.js"
-const Router = express.Router(); 
+import express from "express";
+import {
+  GetAllProducts,
+  AddProduct,
+  UpdateProduct,
+  deleteProduct,
+  ProductSigleProductDetails,
+} from "../controllers/ProdectController.js";
+import cookieCheck, {
+  isAutherizedByAdmin,
+} from "../middlewares/cookieCheck.js";
+const Router = express.Router();
 
+Router.get("/products", GetAllProducts);
+Router.post(
+  "/admin/product/new",
+  cookieCheck,
+  isAutherizedByAdmin("admin"),
+  AddProduct
+);
+Router.route("admin/product/:id")
+  .put(cookieCheck, isAutherizedByAdmin("admin"), UpdateProduct)
+  .delete(cookieCheck, isAutherizedByAdmin("admin"), deleteProduct);
 
-
-
-Router.get("/products", GetAllProducts)
-Router.post("/product/new",AddProduct)
-Router.route("/product/:id").put(UpdateProduct).delete(deleteProduct).get(ProductSigleProductDetails)
-
+Router.get("/product/:id", ProductSigleProductDetails);
 export default Router;

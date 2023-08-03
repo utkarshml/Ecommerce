@@ -7,7 +7,8 @@ import websiteFeatures from "../utils/feature.js";
 
 // create product --- api/v1/api/product/new for admin only
 export const AddProduct = asyncTryCatch(async (req, res , next) => {
-    const { name, description, price,  stock , rating ,images , category  , reviews ,numOfReviews} = req.body;
+    req.body.user = req.user.id
+    const { name, description, price,  stock , rating ,images , category  , reviews ,numOfReviews , user} = req.body;
     const productAddDatabase = await Product.create({
         name,
         description,
@@ -17,6 +18,7 @@ export const AddProduct = asyncTryCatch(async (req, res , next) => {
         images,
         category,
         reviews,
+        user,
         numOfReviews
     })
     res.status(201)
