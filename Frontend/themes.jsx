@@ -1,25 +1,36 @@
-// customTheme.js
-import { extendTheme } from "@chakra-ui/react";
+import { useColorMode } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+import { BsMoonFill , BsSunFill} from "react-icons/bs"
 
-const customTheme = extendTheme({
-  colors: {
-    primary: {
-      50: "purple.50",
-      100: "purple.100",
-      200: "#adc8ff",
-      300: "#84a9ff",
-      // Define your custom shades of the primary color here
-      500: "#3366FF",
-      600: "#254EDB",
-      700: "#1A3DB3",
-      800: "#102C8A",
-      900: "#061C61",
-    },
-    secondary: {
-      // Define your secondary color here
-    },
-    // Define more custom colors as needed
+export const colors = {
+  dark: {
+    background: "#483d8b",
+    text: "white",
+    mainColor : "#9288F8",
+    hover : "a8a1e9"
   },
-});
+  light: {
+    background: "#ff8c00",
+    text: "black",
+    mainColor : "#8062D6",
+    hover : "a8a1e9"
+    
+  },
+  Link : {
+    textdecoration : "none"
+  }
+};
+function Theme(props) {
+  const { colorMode, toggleColorMode } = useColorMode();
 
-export default customTheme;
+  return (
+
+      <div className={props.className}>
+        <Button variant={"ghost"} onClick={toggleColorMode}>
+         {colorMode === "dark" ? <BsMoonFill color="white" /> : <BsSunFill color="black" />  }
+        </Button>
+      </div>
+
+  );
+}
+export default Theme;

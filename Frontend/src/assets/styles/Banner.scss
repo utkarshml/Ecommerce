@@ -1,0 +1,57 @@
+/* ResponsiveCarousel.css */
+@import "colors";
+.carousel-container {
+    max-width: 800px; /* Set a maximum width for the carousel */
+    margin: 0 auto; /* Center the carousel */
+  }
+  
+  .carousel img {
+    max-width: 100%; /* Make sure images fit within their containers */
+    height: auto; /* Maintain aspect ratio */
+    filter: brightness(0.6);
+  }
+  
+  .carousel-container-inside 
+  {
+    position: relative;
+
+  .overlay-carousel{
+    padding: 1rem;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    z-index: 9;
+    > h1{
+        color: white;
+    }
+    .price-span{
+        display: flex;
+       color: white;
+        font-weight: 600;
+        span{
+            
+            color: $primary-color;
+            margin-left: 0.5rem;
+        }
+     
+    }
+    button{
+        color: white;
+        background-color: $primary-color;
+        outline: unset;
+        border-radius: 8px;
+        height: fit-content;
+        width: fit-content;
+        padding: 0.7rem 1rem;
+        &:hover{
+            background-color: $secondry-color;
+        }
+      }
+  }
+
+}

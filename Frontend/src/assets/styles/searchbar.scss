@@ -1,0 +1,85 @@
+@import "colors";
+.searchbar{
+    width: 100%;
+    position: absolute;
+    height: 3rem;
+    display: flex;
+    transition: all 0.4s;
+    margin: 3rem 0 ;
+    align-items: center;
+    flex-wrap: wrap;
+
+    justify-content: space-around;
+    .bar{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 4px;
+        padding: 0 10px;
+        height: 100%;
+        input{
+            border: none;
+            outline: none;
+            height: 100%;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 8px 0 0 8px;
+            color: #333;
+            border: 2px solid $primary-color;
+            &:focus{
+                box-shadow: unset;
+                border: 2px solid $primary-color;
+            }
+        }
+        button{
+            width: 40px;
+            min-width: 40px;
+            height: 100%;
+            border-radius: 0 8px 8px 0;
+            background: $primary-color;
+            border: none;
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            svg{
+                font-size: 20px;
+                color:white;
+                font-weight: 600;
+            }
+            &:hover{
+                background: #eee;
+            }
+        }
+
+
+    }
+
+    .carticons{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 1rem;
+        button{
+            position: relative;
+            margin: 1rem 2rem;
+            span{
+                position: absolute;
+                top: -12px;
+                right: -12px;
+                background-color: $primary-color;
+                color: white;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+
+            }
+            svg{
+                font-size: 1.7rem;
+                font-weight: 600;
+            }
+    
+        }
+    }
+}

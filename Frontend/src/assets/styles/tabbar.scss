@@ -1,0 +1,26 @@
+@import "colors";
+
+.tab-bars{
+    display: flex;
+    border-bottom: 2px solid $secondry-color;
+
+   .tab{
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    height: 100%;
+
+   }
+   .tab-active {
+    background-color: $primary-color;
+    color: white;
+   }
+}
+.tab-content {
+    margin-top: 1rem;
+
+    .content{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
