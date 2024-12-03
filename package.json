@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node Backend/server.js",
-    "server": "nodemon Backend/server.js"
+    "server": "nodemon Backend/server.js",
+    "build": "echo 'No build step required for Node.js backend'"
+
   },
   "keywords": [],
   "author": "",
