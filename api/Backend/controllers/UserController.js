@@ -20,6 +20,10 @@ export const registerUser = asyncTryCatch(async (req, res, next) => {
     name,
     email,
     password,
+    avatar: {
+      public_id: "this is a sample id",
+      url: "this is a sample url",
+    },
   });
   SetCookies(user, res, 201);
 });

@@ -77,14 +77,14 @@ export const deleteProduct = asyncTryCatch(async (req, res, next) => {
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
   }
-  await product.deleteOne();
+  await Product.deleteOne();
   res.status(200).json({
     success: true,
     message: "Product deleted successfully",
   });
 });
 // Single Product all details --- api/v1/api/product/:id for all users`
-export const getSingleProductDetails = asyncTryCatch(
+export const ProductSigleProductDetails = asyncTryCatch(
   async (req, res, next) => {
     const product = await Product.findById(req.params.id);
 
@@ -100,6 +100,9 @@ export const getSingleProductDetails = asyncTryCatch(
 );
 
 // Add Review and update --- api/v1/product/review for all users
+
+// this route some problem solver later
+
 export const addReview = asyncTryCatch(async (req, res, next) => {
   const { rating, comment, productId } = req.body;
   const review = {
@@ -110,7 +113,7 @@ export const addReview = asyncTryCatch(async (req, res, next) => {
   };
   const product = await Product.findById(productId);
   const isReviewed = product.reviews.find(
-    (r) => r.user.toString() === req.user._id.toString()
+    (r) => r.user === req.user._id
   );
   if (isReviewed) {
     product.reviews.forEach((review) => {
@@ -148,30 +151,32 @@ export const getAllReviews = asyncTryCatch(async (req, res, next) => {
 // Delete reviews -- api/v1/product/review for login user and delete own review
 export const  deleteReview = asyncTryCatch(async (req ,res , next)=>{
     const product = await Product.findById(req.query.id);
-    const reviews = product.reviews.filter(
-        (r) => r.user.toString() !== req.user._id.toString()
+    const isReviewed = product.reviews.find(
+        (r) => {
+            console.log(r.user.toString())
+            r.user.toString() === req.user._id.toString()}
       );
-      if(product.reviews.length === reviews.length){
+
+      if(!isReviewed){
           return next(new ErrorHandler("Review not found" , 404));
       }
-      let avg = 0;
-      reviews.forEach((review) => {
-          avg += review.rating;
-      });
-      const numOfReviews = reviews.length;
-      const rating = reviews.length > 0 ? avg / reviews.length : 0;
+      console.log(req.user._id.toString())
+        const reviews = product.reviews.filter(
+            (r) => r.user !== req.user._id
+          );
+        //   console.log(reviews)
+          let avg = 0;
+          reviews.forEach((review) => {
+              avg += review.rating;
+          });
+          const numOfReviews = reviews.length;
+          product.reviews = reviews;
+          product.numOfReviews = numOfReviews;
+          product.rating = avg / reviews.length;
+          await product.save({ validateBeforeSave: false });
+          res.status(200).json({
+              success:true,
+              message:"Review deleted successfully"
+          })
 
-      await Product.findByIdAndUpdate(req.query.id, {
-        reviews,
-        rating,
-        numOfReviews
-      }, {
-          new: true,
-          runValidators: true,
-          useFindAndModify: false
-      })
-      res.status(200).json({
-          success:true,
-          message:"Review deleted successfully"
-      })
 })

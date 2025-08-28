@@ -5,12 +5,12 @@ import {
   UpdateProduct,
   deleteProduct,
   addReview,
-  getSingleProductDetails,
+  ProductSigleProductDetails,
   getAllReviews,
   deleteReview,
-} from "../controllers/ProductController.js";
+} from "../controllers/ProdectController.js";
 import cookieCheck, {
-  authorizeRoles,
+  isAutherizedByAdmin,
 } from "../middlewares/cookieCheck.js";
 const Router = express.Router();
 
@@ -18,15 +18,15 @@ Router.get("/products", GetAllProducts);
 Router.post(
   "/admin/product/new",
   cookieCheck,
-  authorizeRoles("admin"),
+  isAutherizedByAdmin("admin"),
   AddProduct
 );
 Router.route("/admin/product/:id")
-  .put(cookieCheck, authorizeRoles("admin"), UpdateProduct)
-  .delete(cookieCheck, authorizeRoles("admin"), deleteProduct);
+  .put(cookieCheck, isAutherizedByAdmin("admin"), UpdateProduct)
+  .delete(cookieCheck, isAutherizedByAdmin("admin"), deleteProduct);
 Router.route("/user/product/review")
   .put(cookieCheck, addReview)
   .get(getAllReviews)
   .delete(cookieCheck, deleteReview);
-Router.get("/product/:id", getSingleProductDetails);
+Router.get("/product/:id", ProductSigleProductDetails);
 export default Router;

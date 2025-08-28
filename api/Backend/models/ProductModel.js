@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const ProductSchema = new mongoose.Schema({
+const ProdectSchema = new mongoose.Schema({
  name:{
         type:String,
         required:[true,"Please enter product name"],
@@ -78,5 +78,5 @@ const ProductSchema = new mongoose.Schema({
         }
 
     },)
-const ProductModel = mongoose.model("Product", ProductSchema);
-export default ProductModel;
+const ProdectModel = mongoose.model("Product", ProdectSchema);
+export default ProdectModel;
