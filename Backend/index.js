@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import path from 'path';
 import ProductRoutes from "./routes/ProductRoutes.js"
 import UserRoutes from "./routes/UserRoutes.js"
+import OrderRoutes from "./routes/OrderRoutes.js"
 import cookiesParser from 'cookie-parser';
 import database from './config/database.js';
 import ErrorHandler  from './utils/errorHandler.js';     
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/v1/api", ProductRoutes);
 app.use("/v1/api", UserRoutes);
+app.use("/v1/api", OrderRoutes);
 // Error Middleware
 app.use((req, res, next) => {
  next(new ErrorHandler(`${req.originalUrl} route not found`, 404))

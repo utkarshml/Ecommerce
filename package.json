@@ -31,5 +31,8 @@
     "sass": "^1.64.2",
     "sass-loader": "^13.3.2",
     "validator": "^13.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
