@@ -7,12 +7,12 @@ import cookiesParser from 'cookie-parser';
 import database from './config/database.js';
 import ErrorHandler  from './utils/errorHandler.js';     
 
-const configPath = path.join(path.resolve(), "/Backend/config/config.env");
+const configPath = path.join(path.resolve(), "api/Backend/config/config.env");
 
 dotenv.config({
     path: configPath
 });
-export const app = express();
+const app = express();
 // Set up CORS middleware
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:5173');
@@ -32,3 +32,5 @@ app.use((req, res, next) => {
  next(new ErrorHandler(`${req.originalUrl} route not found`, 404))
 })
 app.use(errorMiddleware);
+
+export default app;

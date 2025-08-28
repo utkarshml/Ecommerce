@@ -2,13 +2,10 @@
   "name": "adityaweb",
   "version": "1.0.0",
   "description": "this is a web app for aditya",
-  "main": "Backend/server.js",
   "type": "module",
   "scripts": {
-    "start": "node Backend/server.js",
-    "server": "nodemon Backend/server.js",
-    "build": "echo 'No build step required for Node.js backend'"
-
+    "build": "cd Frontend && npm install && npm run build",
+    "dev": "nodemon api/Backend/local_server.js"
   },
   "keywords": [],
   "author": "",
@@ -31,5 +28,8 @@
     "sass": "^1.64.2",
     "sass-loader": "^13.3.2",
     "validator": "^13.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
